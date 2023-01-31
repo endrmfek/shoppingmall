@@ -2,14 +2,13 @@ package com.practice.jpashoppingmall.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class HomeController {
+public class ItemController {
 
-
-    @GetMapping("/")
-    public String home() {
-        return "home";
+    @GetMapping("/admin/item/new")
+    public String itemForm() {
+        return "/item/itemForm";
     }
+
 }
