@@ -7,7 +7,7 @@ buildscript { // 이놈
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.6.8'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 

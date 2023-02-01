@@ -1,6 +1,7 @@
 package com.practice.jpashoppingmall.entity;
 
 
+import com.practice.jpashoppingmall.auditor.BaseEntity;
 import com.practice.jpashoppingmall.constant.Role;
 import com.practice.jpashoppingmall.dto.MemberFormDto;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "member")
 @ToString
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue // strategy default = AUTO

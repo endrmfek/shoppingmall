@@ -1,5 +1,6 @@
 package com.practice.jpashoppingmall.entity;
 
+import com.practice.jpashoppingmall.auditor.BaseEntity;
 import com.practice.jpashoppingmall.constant.ItemSellStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @GeneratedValue // strategy 사용 가능.
@@ -38,8 +39,5 @@ public class Item {
     @Enumerated(EnumType.STRING)  // enum타입 설정.
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-    private LocalDateTime regTime; // 등록시간
-
-    private LocalDateTime updateTime; // 수정시간
 
 }
