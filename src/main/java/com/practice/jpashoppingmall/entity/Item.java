@@ -2,6 +2,7 @@ package com.practice.jpashoppingmall.entity;
 
 import com.practice.jpashoppingmall.auditor.BaseEntity;
 import com.practice.jpashoppingmall.constant.ItemSellStatus;
+import com.practice.jpashoppingmall.dto.ItemFormDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -39,5 +40,11 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)  // enum타입 설정.
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.itemName = itemFormDto.getItemName();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
 }
