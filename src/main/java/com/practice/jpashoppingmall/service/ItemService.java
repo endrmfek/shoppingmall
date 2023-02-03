@@ -2,16 +2,21 @@ package com.practice.jpashoppingmall.service;
 
 import com.practice.jpashoppingmall.dto.ItemFormDto;
 import com.practice.jpashoppingmall.dto.ItemImageDto;
+import com.practice.jpashoppingmall.dto.ItemSearchDto;
+import com.practice.jpashoppingmall.dto.MainItemDto;
 import com.practice.jpashoppingmall.entity.Item;
 import com.practice.jpashoppingmall.entity.ItemImage;
 import com.practice.jpashoppingmall.repository.ItemImageRepository;
 import com.practice.jpashoppingmall.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.TransactionScoped;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +75,16 @@ public class ItemService {
             itemImageService.updateItemImage(itemImageIds.get(i) , itemImageFileList.get(i));
         }
         return item.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto , Pageable pageable) {
+        return itemRepository.getAdminItemPage(itemSearchDto , pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto , pageable);
     }
 
 }

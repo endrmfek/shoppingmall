@@ -19,7 +19,7 @@ public class JpashoppingmallApplication {
 		SpringApplication.run(JpashoppingmallApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner run(MemberRepository memberRepository , PasswordEncoder passwordEncoder) {
 		return (String[] arg) -> {Member member = new Member();
 		member.setName("관리자");
@@ -30,7 +30,7 @@ public class JpashoppingmallApplication {
 		member.setRole(Role.ADMIN);
 		memberRepository.save(member);
 		};
-	}
+	}*/
 
 
 }
