@@ -30,7 +30,7 @@ public class ItemImageService {
 
         if(!StringUtils.isEmpty(originalImageName)) {
             imageName = fileService.uploadFile(itemImageLocation , originalImageName , itemImageFile.getBytes());
-            imageUrl = "/images/item" + imageName;
+            imageUrl = "/images/item/" + imageName;
         }
 
         itemImage.updateItemImage(originalImageName , imageName, imageUrl);
@@ -50,7 +50,7 @@ public class ItemImageService {
 
             String originalImageName = itemImageFile.getOriginalFilename();
             String imageName = fileService.uploadFile(itemImageLocation , originalImageName , itemImageFile.getBytes());
-            String imageUrl = "/images/item" + imageName;
+            String imageUrl = "/images/item/" + imageName;
 
             savedItemImage.updateItemImage(originalImageName , imageName , imageUrl);
 
