@@ -66,7 +66,7 @@ public class ItemController {
      * 상품 수정
      * */
     @GetMapping("/admin/item/{itemId}")
-    public String itemDetail(@PathVariable("itemId") Long itemId,
+    public String itemUpdate(@PathVariable("itemId") Long itemId,
                              Model model) {
         try{
             ItemFormDto itemFormDto = itemService.getItem(itemId);
@@ -116,7 +116,16 @@ public class ItemController {
         model.addAttribute("itemSearchDto" , itemSearchDto);
         model.addAttribute("maxPage" , 5);
         return "item/itemManage";
+    }
 
+    /**
+     * 상품 상세 페이지
+     * */
+    @GetMapping("/item/{itemId}")
+    public String itemDetail(@PathVariable("itemId") Long itemId , Model model) {
+        ItemFormDto itemFormDto = itemService.getItem(itemId);
+        model.addAttribute("item", itemFormDto);
+        return "item/itemDetail";
     }
 
 

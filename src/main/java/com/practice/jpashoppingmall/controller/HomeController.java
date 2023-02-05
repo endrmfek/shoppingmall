@@ -28,6 +28,7 @@ public class HomeController {
 
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
         model.addAttribute("items" , items);
+        //여기
 //        model.addAttribute("itemSearchDto", itemSearchDto);
         model.addAttribute("maxPage" , 5);
 
