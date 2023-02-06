@@ -3,6 +3,7 @@ package com.practice.jpashoppingmall.entity;
 import com.practice.jpashoppingmall.auditor.BaseEntity;
 import com.practice.jpashoppingmall.constant.ItemSellStatus;
 import com.practice.jpashoppingmall.dto.ItemFormDto;
+import com.practice.jpashoppingmall.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -39,6 +40,18 @@ public class Item extends BaseEntity {
 
     @Enumerated(EnumType.STRING)  // enum타입 설정.
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
+
+    public void addStock(int stockNumber) {
+        this.stockNumber += stockNumber;
+    }
+
+    public void removeStock(int stockNumber) {
+        int restStock = this.stockNumber - stockNumber;
+        if(restStock < 0) {
+            throw new OutOfStockException("상품의 재고가 부족합니다. (현재 재고 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
+    }
 
     public void updateItem(ItemFormDto itemFormDto) {
         this.itemName = itemFormDto.getItemName();
