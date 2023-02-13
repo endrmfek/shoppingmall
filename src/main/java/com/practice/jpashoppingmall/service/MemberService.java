@@ -17,6 +17,7 @@ public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository; //의존성 주입 -> 생성자 주입
 
+    //UserDetailService를 구현함으로써 로그인 로직 최소화
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email);

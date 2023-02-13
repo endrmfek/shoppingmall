@@ -29,12 +29,18 @@ public class MemberController {
         return Role.values();
     }
 
+    /**
+     * 회원가입 화면 진입
+    * */
     @GetMapping("/new")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDto" , new MemberFormDto());
         return "member/memberForm";
     }
 
+    /**
+     * 회원가입 폼 제출
+     * */
     //ModelAttribute 생략 가능.
     @PostMapping("/new")
     public String memberForm(@Valid @ModelAttribute("memberFormDto") MemberFormDto memberFormDto,
@@ -49,6 +55,7 @@ public class MemberController {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
         } catch (IllegalStateException e) {
+            //에러 발생시 에러를 모델에 담아 넘김
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
         }
@@ -56,11 +63,17 @@ public class MemberController {
         return "redirect:/";
     }
 
+    /**
+     * 로그인 화면 진입
+     * */
     @GetMapping("/login")
     public String login() {
         return "/member/memberLoginForm";
     }
 
+    /**
+    * 로그인 에러 발생 시 진입 화면
+    * */
     @GetMapping("/login/error")
     public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");

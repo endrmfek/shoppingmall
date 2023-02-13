@@ -29,14 +29,17 @@ public class ItemController {
     private final ItemService itemService;
 
     /**
-     * 상품 등록
+     * 상품 등록 페이지 진입
      * */
     @GetMapping("/admin/item/new")
-    public String itemForm(Model model) {
+    public String itemForm(Model model) { //ItemFormDto 를 매개변수에 그냥 넣어도됨.
         model.addAttribute("itemFormDto" , new ItemFormDto());
         return "/item/itemForm";
     }
 
+    /**
+     * 상품 등록 (Create)
+     * */
     @PostMapping("/admin/item/new")
     public String itemNew(@Valid ItemFormDto itemFormDto,
                           BindingResult bindingResult,
@@ -63,13 +66,15 @@ public class ItemController {
     }
 
     /**
-     * 상품 수정
+     * 상품 수정 화면 진입 -> itemId로 구분
      * */
     @GetMapping("/admin/item/{itemId}")
     public String itemUpdate(@PathVariable("itemId") Long itemId,
                              Model model) {
         try{
+            //DB에서 정보 가져와서
             ItemFormDto itemFormDto = itemService.getItem(itemId);
+            //Model로 넘겨
             model.addAttribute("itemFormDto", itemFormDto);
         } catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", "존재하지 않는 상품입니다.");
@@ -80,6 +85,19 @@ public class ItemController {
         return "item/itemForm";
     }
 
+    /**
+     * 상품 상세 페이지 (Read)
+     * */
+    @GetMapping("/item/{itemId}")
+    public String itemDetail(@PathVariable("itemId") Long itemId , Model model) {
+        ItemFormDto itemFormDto = itemService.getItem(itemId);
+        model.addAttribute("item", itemFormDto);
+        return "item/itemDetail";
+    }
+
+    /**
+     * 상품 수정 (Update)
+     * */
     @PostMapping("/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto,
                              BindingResult bindingResult,
@@ -104,6 +122,7 @@ public class ItemController {
         return "redirect:/";
     }
 
+
     @GetMapping({"/admin/items" , "/admin/items/{page}"})
     public String itemManage(ItemSearchDto itemSearchDto,
                              @PathVariable("page") Optional<Integer> page,
@@ -116,16 +135,6 @@ public class ItemController {
         model.addAttribute("itemSearchDto" , itemSearchDto);
         model.addAttribute("maxPage" , 5);
         return "item/itemManage";
-    }
-
-    /**
-     * 상품 상세 페이지
-     * */
-    @GetMapping("/item/{itemId}")
-    public String itemDetail(@PathVariable("itemId") Long itemId , Model model) {
-        ItemFormDto itemFormDto = itemService.getItem(itemId);
-        model.addAttribute("item", itemFormDto);
-        return "item/itemDetail";
     }
 
 
